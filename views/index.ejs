@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>Welcome to <%= title %>
+  </p>
+  <p>
+    <% anuncios.forEach(anuncio=> { %>
+      <%= anuncio.nombre%>
+
+        <img src="/<%=anuncio.foto%>" alt="" style="max-width: 420px; max-height: 300px;">
+        <% if (anuncio.venta===true) { %>
+          En venta
+          <% } else { %>
+            Se busca
+            <% } %>
+              <p>Precio: <%= anuncio.precio%>€ Tags: <%= anuncio.tags %>
+              </p>
+  </p>
+
+  <% }) %>
+    <% if (paginacion.skip>= 1) { %>
+      <a
+        href="./?skip=<%= anterior = paginacion.skip - 5 %>&nombre=<%= paginacion.nombre %>&precio=<%= paginacion.precio %>&venta=<%= paginacion.venta %>&tags=<%= paginacion.tags %>">
+        anterior</a>
+      <% } else { %>
+        <a
+          href="./?skip=<%= siguiente = paginacion.skip + 5 %>&nombre=<%= paginacion.nombre %>&precio=<%= paginacion.precio %>&venta=<%= paginacion.venta %>&tags=<%= paginacion.tags %>">siguiente
+        </a>
+
+
+        <% } %>
+</body>
+
+</html>
