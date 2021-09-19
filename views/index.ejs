@@ -29,15 +29,17 @@
   </p>
 
   <% }) %>
-    <% if (paginacion.skip>= 1) { %>
+    <% if (pagination.skip>= 1) { %>
       <a
-        href="./?skip=<%= anterior = paginacion.skip - 5 %>&nombre=<%= paginacion.nombre %>&precio=<%= paginacion.precio %>&venta=<%= paginacion.venta %>&tags=<%= paginacion.tags %>">
-        anterior</a>
+        href="./?skip=<%= anterior = pagination.skip - 5 %>&nombre=<%= pagination.nombre %>&precio=<%= pagination.precio %>&venta=<%= pagination.venta %>&tags=<%= pagination.tags %>">
+        previous</a>
+      <a
+        href="./?skip=<%= siguiente = pagination.skip + 5 %>&nombre=<%= pagination.nombre %>&precio=<%= pagination.precio %>&venta=<%= pagination.venta %>&tags=<%= pagination.tags %>">next
+      </a>
       <% } else { %>
         <a
-          href="./?skip=<%= siguiente = paginacion.skip + 5 %>&nombre=<%= paginacion.nombre %>&precio=<%= paginacion.precio %>&venta=<%= paginacion.venta %>&tags=<%= paginacion.tags %>">siguiente
+          href="./?skip=<%= pagination.skip = 5 %>&nombre=<%= pagination.nombre %>&precio=<%= pagination.precio %>&venta=<%= pagination.venta %>&tags=<%= pagination.tags %>">next
         </a>
-
 
         <% } %>
 </body>

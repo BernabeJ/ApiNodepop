@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const Anuncio = require('../models/Anuncio');
-
+const utils = require('../lib/utils');
+ 
 /* GET home page. */
 router.get('/', async  (req, res, next) => {
   try {
@@ -9,7 +10,7 @@ router.get('/', async  (req, res, next) => {
         const nombre = req.query.nombre;
         const tags = req.query.tags;
         const venta = req.query.venta;
-        const precio = parseInt(req.query.precio);
+        const precio =req.query.precio;
         const skip = parseInt(req.query.skip);
         const limit = parseInt(req.query.limit);
         const select = req.query.select; // campos
@@ -28,31 +29,28 @@ router.get('/', async  (req, res, next) => {
     if (venta) {
         filtro.venta = venta;
     }
-    
-    if (precio >= 10 && precio <= 50) {
-        filtro.precio = {$gte: 10, $lte:50}
-    }
-    
-    if (precio > 100 ) {
-        filtro.precio = {$gte: 100}
-    }
-        
-    if (precio <500) {
-        filtro.precio = {$lte:500}
-    }
-    
-    if (precio >5000) {
-        filtro.precio = {$gte:5000}
-    }
-
-    const anuncios = await Anuncio.lista(filtro, skip || 0, limit || 5, select, sort);
 
     
-      res.render('index', { anuncios, paginacion: {nombre, venta, precio, tags, skip, limit} });
+    if (precio) {
+         
+          let precioMin = parseInt(utils.priceSplitter(precio)[0])
+          let precioMax = parseInt(utils.priceSplitter(precio)[1])    
+          filtro.precio = {$gte: precioMin, $lte: precioMax}
+      }
+
     
-  } catch (err) {
-    next(err);
-  }
+      
+    
+      
+      const anuncios = await Anuncio.lista(filtro, skip || 0, limit || 5, select, sort);
+      
+      
+      res.render('index', { anuncios, pagination: {nombre, venta, precio, tags, skip, limit} });
+      
+    } catch (err) {
+      next(err);
+    }
+  
 });
 
 
