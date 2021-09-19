@@ -33,8 +33,8 @@ Para obtener una lista de Anuncios:
 
 ### /api/anuncios/
 
-## con los parametros skip y limit controlamos la paginación
+- con los parametros skip y limit controlamos la paginación
 
-## podemos filtrar por precio entre un rango, o dejarlo vacio y que nos liste todos los articulos, o buscar alguno con un precio en concreto.
+- podemos filtrar por precio entre un rango, o dejarlo vacio y que nos liste todos los articulos, o buscar alguno con un precio en concreto.
 
 Aun estamos en fase inicial del proyecto, por lo que se irán realizando mejoras al mismo conforme vayan surgiendo necesidades.
