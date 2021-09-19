@@ -40,7 +40,8 @@ router.get('/', async  (req, res, next) => {
           let precioMax =  Math.max.apply(null, precios) 
           filtro.precio = { $gte: precioMin, $lte: precioMax }
       
-      }
+    }
+    
 
     
       
