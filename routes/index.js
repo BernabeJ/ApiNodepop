@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Anuncio = require('../models/Anuncio');
-const utils = require('../lib/utils');
+// const utils = require('../lib/utils');
  
 /* GET home page. */
 router.get('/', async  (req, res, next) => {
@@ -31,11 +31,15 @@ router.get('/', async  (req, res, next) => {
     }
 
     
+    let precios = precio.split('-');
+    
+    
     if (precio) {
          
-          let precioMin = parseInt(utils.filtraPrecio(precio)[0])
-          let precioMax = parseInt(utils.filtraPrecio(precio)[1])    
-          filtro.precio = {$gte: precioMin, $lte: precioMax}
+          let precioMin =  Math.min.apply(null, precios)
+          let precioMax =  Math.max.apply(null, precios) 
+          filtro.precio = { $gte: precioMin, $lte: precioMax }
+      
       }
 
     
