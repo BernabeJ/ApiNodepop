@@ -20,33 +20,36 @@ router.get('/', async (req, res, next) => {
 
         const filtro = {};
 
-    if (nombre) {
-      filtro.nombre = nombre;
-    }
+        if (nombre) {
+            filtro.nombre = nombre;
+        }
 
-    if (tags) {
-        filtro.tags = tags;
-    }
+        if (tags) {
+            filtro.tags = tags;
+        }
     
-    if (venta) {
-        filtro.venta = venta;
-    }
+        if (venta) {
+            filtro.venta = venta;
+        }
 
-   
+      
+    
 
      if (precio) {
-         
-          let precioMin = parseInt(utils.priceSplitter(precio)[0])
-          let precioMax = parseInt(utils.priceSplitter(precio)[1])    
+
+          let precioMin = parseInt(utils.filtraPrecio(precio)[0])
+          let precioMax = parseInt(utils.filtraPrecio(precio)[1])    
           filtro.precio = {$gte: precioMin, $lte: precioMax}
       }
-
-
+        
+ 
+    
+    
     const anuncios = await Anuncio.lista(filtro, skip, limit, select, sort);
-    res.json({ results: anuncios });
-  } catch (err) {
+    res.json({ results: anuncios});
+} catch (err) {
     next(err);
-  }
+}
 });
 
 //POST /api/anuncios(body)

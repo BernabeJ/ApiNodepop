@@ -33,8 +33,8 @@ router.get('/', async  (req, res, next) => {
     
     if (precio) {
          
-          let precioMin = parseInt(utils.priceSplitter(precio)[0])
-          let precioMax = parseInt(utils.priceSplitter(precio)[1])    
+          let precioMin = parseInt(utils.filtraPrecio(precio)[0])
+          let precioMax = parseInt(utils.filtraPrecio(precio)[1])    
           filtro.precio = {$gte: precioMin, $lte: precioMax}
       }
 
