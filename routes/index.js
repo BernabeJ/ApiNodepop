@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Anuncio = require('../models/Anuncio');
-// const utils = require('../lib/utils');
+
  
 /* GET home page. */
 router.get('/', async  (req, res, next) => {
